@@ -1,6 +1,5 @@
 package com.hadiyarajesh.easynotes.di
 
-import com.hadiyarajesh.easynotes.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

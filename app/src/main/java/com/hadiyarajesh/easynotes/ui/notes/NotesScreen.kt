@@ -3,9 +3,9 @@ package com.hadiyarajesh.easynotes.ui.notes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -26,6 +26,7 @@ import com.hadiyarajesh.easynotes.ui.components.LoadingProgressBar
 import com.hadiyarajesh.easynotes.ui.components.NotesTopBar
 import com.hadiyarajesh.easynotes.ui.components.RetryItem
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
     navController: NavController,
