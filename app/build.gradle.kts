@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
+//    id("com.google.gms.google-services")
     kotlin("kapt")
 }
 
@@ -77,29 +78,31 @@ android {
 }
 
 object LibVersion {
-    const val composeVersion = "1.2.0"
-    const val composeCompilerVersion = "1.2.0"
-    const val navigationComposeVersion = "2.5.1"
+    const val composeCompilerVersion = "1.3.2"
     const val roomVersion = "2.4.2"
     const val dataStoreVersion = "1.0.0"
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.13.0"
-    const val accompanistVersion = "0.25.0"
+    const val accompanistVersion = "0.27.0"
+    const val flowerVersion = "3.0.0"
+    const val coilVersion = "2.2.2"
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.activity:activity-compose:1.5.1")
+    val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
+    val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
+
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("androidx.compose.ui:ui:${LibVersion.composeVersion}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${LibVersion.composeVersion}")
-    implementation("androidx.compose.material:material:${LibVersion.composeVersion}")
-    implementation("androidx.navigation:navigation-compose:${LibVersion.navigationComposeVersion}")
+    implementation(composeBom)
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.navigation:navigation-compose:2.6.0-alpha03")
     implementation("androidx.datastore:datastore-preferences:${LibVersion.dataStoreVersion}")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha16")
-    // DO NOT upgrade desugar_jdk_libs to 1.2.0
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.8")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVersion"]}")
@@ -119,18 +122,21 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:${LibVersion.accompanistVersion}")
     implementation("com.google.accompanist:accompanist-permissions:${LibVersion.accompanistVersion}")
 
-    implementation("io.coil-kt:coil-compose:2.1.0") {
+    implementation("io.coil-kt:coil-compose:${LibVersion.coilVersion}") {
         because("We need image loading library")
     }
 
-    implementation("io.github.hadiyarajesh.flower-retrofit:flower-retrofit:3.0.0") {
+    implementation("io.github.hadiyarajesh.flower-retrofit:flower-retrofit:${LibVersion.flowerVersion}") {
         because("We need networking and database caching")
     }
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${LibVersion.composeVersion}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${LibVersion.composeVersion}")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${LibVersion.composeVersion}")
+    // UI Tests
+    androidTestImplementation(composeBom)
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    // Android Studio Preview support
+    debugImplementation("androidx.compose.ui:ui-tooling")
 }

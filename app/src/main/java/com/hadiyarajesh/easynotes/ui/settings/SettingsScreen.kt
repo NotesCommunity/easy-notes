@@ -1,9 +1,10 @@
 package com.hadiyarajesh.easynotes.ui.settings
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,6 +14,7 @@ import androidx.navigation.NavController
 import com.hadiyarajesh.easynotes.R
 import com.hadiyarajesh.easynotes.ui.components.SettingsTopBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     navController: NavController,
@@ -30,10 +32,9 @@ fun SettingsScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.settings),
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
         }
     }
 }
-
