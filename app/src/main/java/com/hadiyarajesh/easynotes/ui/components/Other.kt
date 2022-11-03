@@ -3,12 +3,20 @@ package com.hadiyarajesh.easynotes.ui.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -97,7 +105,7 @@ fun SubComposeImageItem(
 fun LoadingProgressBar(
     modifier: Modifier = Modifier,
     size: Dp = 40.dp,
-    color: Color = MaterialTheme.colors.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
     strokeWidth: Dp = 4.dp
 ) {
     Box(modifier = modifier) {
@@ -131,8 +139,8 @@ fun RetryItem(
 fun ErrorText(
     modifier: Modifier = Modifier,
     text: String,
-    color: Color = MaterialTheme.colors.error,
-    style: TextStyle = MaterialTheme.typography.caption
+    color: Color = MaterialTheme.colorScheme.error,
+    style: TextStyle = MaterialTheme.typography.labelMedium
 ) {
     Text(
         modifier = modifier,
@@ -165,7 +173,7 @@ fun EmptyViewWithImage(
         VerticalSpacer(size = 8)
         Text(
             text = text,
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
         )
     }
@@ -183,7 +191,7 @@ fun EmptyViewWithText(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold
         )
     }
