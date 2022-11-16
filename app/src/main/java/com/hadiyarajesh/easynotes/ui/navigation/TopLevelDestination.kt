@@ -29,6 +29,12 @@ sealed class TopLevelDestination(
         selectedIcon = R.drawable.ic_settings_outlined,
         unselectedIcon = R.drawable.ic_settings_outlined
     )
+    object Auth : TopLevelDestination(
+        title = "Auth",
+        route="Auth",
+        selectedIcon = R.drawable.ic_settings_outlined,
+        unselectedIcon = R.drawable.ic_settings_outlined
+    )
 
     fun withArgs(vararg args: Any): String {
         return buildString {
