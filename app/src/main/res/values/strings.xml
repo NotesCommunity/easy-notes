@@ -7,8 +7,10 @@
 
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
+    <string name="create_note">Create Note</string>
 
     <string name="welcome_message">Welcome to EasyNotes</string>
     <string name="retry">Retry</string>
     <string name="empty_message">It\'s all empty here</string>
+    <string name="title_activity_create_note">CreateNoteActivity</string>
 </resources>

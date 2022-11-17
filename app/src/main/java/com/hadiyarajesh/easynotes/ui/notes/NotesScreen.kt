@@ -3,9 +3,9 @@ package com.hadiyarajesh.easynotes.ui.notes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,6 +25,7 @@ import com.hadiyarajesh.easynotes.ui.components.EmptyViewWithText
 import com.hadiyarajesh.easynotes.ui.components.LoadingProgressBar
 import com.hadiyarajesh.easynotes.ui.components.NotesTopBar
 import com.hadiyarajesh.easynotes.ui.components.RetryItem
+import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +38,8 @@ fun NotesScreen(
     val notes = remember { notesViewModel.notes }.collectAsLazyPagingItems()
 
     Scaffold(
-        topBar = { NotesTopBar() }
+        topBar = { NotesTopBar() },
+        floatingActionButton = { MyFloatingActionButton(navController) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -51,6 +53,17 @@ fun NotesScreen(
                 onClick = {}
             )
         }
+    }
+}
+@Composable
+private fun MyFloatingActionButton(navController: NavController) {
+    FloatingActionButton(
+        onClick = {
+            navController.navigate(TopLevelDestination.CreateNote.route)
+        },
+    ) {
+
+        Icon(Icons.Filled.Add,"Create Note",)
     }
 }
 

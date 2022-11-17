@@ -89,6 +89,8 @@ object LibVersion {
 }
 
 dependencies {
+    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_ui_version"]}")
+    implementation("androidx.compose.material:material:1.1.1")
     val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
     val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
 
