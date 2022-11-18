@@ -43,6 +43,9 @@ fun AuthScreen(
 ) {
     val status by viewModel.loadingState.collectAsState()
     var isLoading by remember { mutableStateOf(false) }
+    var errorText by remember{
+        mutableStateOf("")
+    }
     val context = LocalContext.current
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
@@ -100,7 +103,7 @@ fun AuthView(isLoading: Boolean, onClick: () -> Unit) {
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
                         .fillMaxHeight(0.6f),
-                    shape = RoundedCornerShape(topStart = 26.dp, topEnd = 26.dp)
+                    color = Color.Unspecified
                 ) {
                     Column(
                         verticalArrangement = Arrangement.Top,
