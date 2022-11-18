@@ -86,6 +86,7 @@ object LibVersion {
     const val accompanistVersion = "0.27.0"
     const val flowerVersion = "3.0.0"
     const val coilVersion = "2.2.2"
+    const val authVersion = "20.4.0"
 }
 
 dependencies {
@@ -94,7 +95,7 @@ dependencies {
     val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
     implementation(firebaseBom)
     implementation ("com.google.firebase:firebase-auth-ktx")
-    implementation ("com.google.android.gms:play-services-auth:20.4.0")
+    implementation ("com.google.android.gms:play-services-auth:${LibVersion.authVersion}")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:1.6.1")

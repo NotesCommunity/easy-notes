@@ -28,6 +28,7 @@ import com.hadiyarajesh.easynotes.R
 @ExperimentalMaterialApi
 @Composable
 fun SignInButton(
+    modifier: Modifier = Modifier,
     text: String,
     loadingText: String = "Signing in...",
     icon: Painter,
@@ -36,7 +37,6 @@ fun SignInButton(
     borderColor: Color = Color.LightGray,
     backgroundColor: Color = Color.White,
     progressIndicatorColor: Color = Color.Red,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Surface(
@@ -68,13 +68,13 @@ fun SignInButton(
             Image(
                 painter = icon,
                 contentDescription = "SignInButton",
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(22.dp)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            HorizontalSpacer(size = 8)
 
-            Text(text = if (isLoading) loadingText else text, fontSize = 22.sp)
+            Text(text = if (isLoading) loadingText else text, fontSize = 16.sp)
             if (isLoading) {
-                Spacer(modifier = Modifier.width(16.dp))
+                HorizontalSpacer(size = 16)
                 CircularProgressIndicator(
                     modifier = Modifier
                         .height(16.dp)
