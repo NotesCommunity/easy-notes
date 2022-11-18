@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -34,7 +35,7 @@ fun EasyNotesApp() {
         // A state that maintains visibility of a bottom bar
         val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
-        AuthScreen()
+        AuthScreen(navController)
         /*Scaffold(
             bottomBar = {
                 AnimatedVisibility(
