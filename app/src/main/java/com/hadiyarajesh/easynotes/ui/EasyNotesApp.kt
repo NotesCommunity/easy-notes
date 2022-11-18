@@ -20,6 +20,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hadiyarajesh.easynotes.ui.auth.AuthScreen
 import com.hadiyarajesh.easynotes.ui.navigation.EasyNotesNavigation
 import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 import com.hadiyarajesh.easynotes.ui.navigation.bottomNavItems
@@ -33,7 +34,8 @@ fun EasyNotesApp() {
         // A state that maintains visibility of a bottom bar
         val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
-        Scaffold(
+        AuthScreen()
+        /*Scaffold(
             bottomBar = {
                 AnimatedVisibility(
                     visible = bottomBarState.value,
@@ -61,7 +63,7 @@ fun EasyNotesApp() {
                 navController = navController,
                 bottomBarState = bottomBarState
             )
-        }
+        }*/
     }
 }
 

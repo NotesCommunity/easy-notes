@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
-//    id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
     kotlin("kapt")
 }
 
@@ -35,9 +35,9 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix = ".debug"
+            /*applicationIdSuffix = ".debug"*/
 
-            resValue("string", "app_name", "@string/app_name_debug")
+            resValue("string", "app_name", "@string/app_name")
 
             buildConfigField("String", "API_BASE_URL", "\"BASE_API_URL_DEV\"")
         }
@@ -89,8 +89,12 @@ object LibVersion {
 }
 
 dependencies {
+    implementation("androidx.compose.material:material:1.1.1")
     val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
     val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
+    implementation(firebaseBom)
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.android.gms:play-services-auth:20.4.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:1.6.1")
