@@ -35,22 +35,21 @@ fun AuthScreen(navController: NavController,
     var isLoading by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()){result->
-        Log.e("TAG", "Google Sign In Failed ${dumpIntent(result.data!!)}" )
         if(result.resultCode == RESULT_OK){
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try{
                 val account = task.getResult(ApiException::class.java)
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-                Log.e("TAG", "$account, $credential" )
                 viewModel.signInWithGoogle(credential)
             }
             catch (e: Exception){
-                Log.e("TAG", "Google Sign In Failed" )
+                Log.e("TAG", "Google Sign In Failed ${e.localizedMessage}" )
             }
         }
     }
     AuthView(isLoading) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com")
             .requestEmail()
             .build()
         val googleSignInClient = GoogleSignIn.getClient(context,gso)
@@ -58,16 +57,13 @@ fun AuthScreen(navController: NavController,
     }
     when(status.status){
         LoadingState.Status.SUCCESS->{
-            isLoading = true
-            Log.e("TAG", "Google Sign In Failed" )
+            isLoading = false
         }
         LoadingState.Status.FAILED->{
             isLoading = false
-            Log.e("TAG", "Google Sign In Failed" )
         }
         else->{
-            isLoading = false
-            Log.e("TAG", "Google Sign In Failed" )
+            isLoading = true
         }
     }
 }
