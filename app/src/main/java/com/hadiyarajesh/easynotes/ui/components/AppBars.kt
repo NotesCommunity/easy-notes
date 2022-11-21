@@ -43,16 +43,12 @@ fun ProfileTopBar(
 fun AddNoteTopBar(
     onBackClick: () -> Unit,
     createNoteClick: () -> Unit,
-    insertMediaClick: () -> Unit,
     title: String,
 
 ) {
     TopAppBar(
         title = { Text(text = title) },
         actions = {
-            IconButton(onClick = insertMediaClick) {
-                Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_attach_file_24) , contentDescription = null)
-            }
             IconButton(onClick = createNoteClick) {
                 Icon(imageVector = Icons.Default.Check, contentDescription = null)
             }
