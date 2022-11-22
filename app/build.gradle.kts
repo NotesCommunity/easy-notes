@@ -86,6 +86,7 @@ object LibVersion {
     const val accompanistVersion = "0.27.0"
     const val flowerVersion = "3.0.0"
     const val coilVersion = "2.2.2"
+    const val safeNetVersion =""
 }
 
 dependencies {
@@ -140,9 +141,12 @@ dependencies {
     // Android Studio Preview support
     debugImplementation("androidx.compose.ui:ui-tooling")
 
+    //firebase
+    implementation(firebaseBom)
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.android.gms:play-services-auth:20.3.0")
+    implementation("com.google.android.gms:play-services-auth:20.4.0")
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.android.gms:play-services-safetynet:${LibVersion.safeNetVersion}")
 
 
 }
