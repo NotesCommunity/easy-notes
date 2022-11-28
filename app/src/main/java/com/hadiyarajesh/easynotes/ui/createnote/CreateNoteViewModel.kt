@@ -14,8 +14,5 @@ import javax.inject.Inject
 class CreateNoteViewModel @Inject constructor(
     private val notesRepository: NotesRepository
 ) : ViewModel() {
-    val notes: Flow<PagingData<Note>> =
-        notesRepository
-            .getAllNotes()
-            .cachedIn(viewModelScope)
+    
 }

@@ -1,6 +1,5 @@
 buildscript {
     val hiltVersion by extra("2.44")
-    val compose_ui_version by extra("1.1.1")
 
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
