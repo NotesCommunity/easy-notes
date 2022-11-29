@@ -11,4 +11,5 @@
     <string name="welcome_message">Welcome to EasyNotes</string>
     <string name="retry">Retry</string>
     <string name="empty_message">It\'s all empty here</string>
+    <string name="tandc">By joining, you agree to the Privacy Policy and Terms of Usage</string>
 </resources>

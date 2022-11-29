@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,20 +34,26 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.hadiyarajesh.easynotes.R
 import com.hadiyarajesh.easynotes.ui.components.SignInButton
+import com.hadiyarajesh.easynotes.ui.components.VerticalSpacer
+import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 import com.hadiyarajesh.easynotes.ui.theme.Purple80
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AuthScreen(
-    navController: NavController,
-    viewModel: AuthViewModel = hiltViewModel()
+    navController: NavController, viewModel: AuthViewModel
 ) {
+
     val status by viewModel.loadingState.collectAsState()
+    val userSignedIn by viewModel.userSignedIn.collectAsState(initial = false)
     var isLoading by remember { mutableStateOf(false) }
-    var errorText by remember{
+    var errorText by remember {
         mutableStateOf("")
     }
+    if(userSignedIn == true){
+        navController.navigate(TopLevelDestination.Notes.route)
+    }
+
     val context = LocalContext.current
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
@@ -53,6 +61,7 @@ fun AuthScreen(
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 try {
                     val account = task.getResult(ApiException::class.java)
+                    Log.e("TAG", "AuthScreen: $account" )
                     val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
                     viewModel.signInWithGoogle(credential)
                 } catch (e: Exception) {
@@ -61,10 +70,10 @@ fun AuthScreen(
             }
         }
     AuthView(isLoading) {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com")
+                .requestEmail().build()
         val googleSignInClient = GoogleSignIn.getClient(context, gso)
         launcher.launch(googleSignInClient.signInIntent)
     }
@@ -72,11 +81,11 @@ fun AuthScreen(
         LoadingState.Status.SUCCESS -> {
             isLoading = false
         }
-        LoadingState.Status.FAILED -> {
-            isLoading = false
+        LoadingState.Status.RUNNING -> {
+            isLoading = true
         }
         else -> {
-            isLoading = true
+            isLoading = false
         }
     }
 }
@@ -89,55 +98,29 @@ fun AuthView(isLoading: Boolean, onClick: () -> Unit) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues = it),
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
-            Box(
+            VerticalSpacer(size = 40)
+            Image(
+                painter = painterResource(id = R.drawable.google),
+                contentDescription = "",
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = Color.Blue.copy(green=0.87f))
+                    .padding(12.dp)
+                    .size(100.dp)
+            )
+            SignInButton(
+                text = "Sign in with Google",
+                icon = painterResource(id = R.drawable.google),
+                isLoading = isLoading
             ) {
-                Surface(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.6f),
-                    color = Color.Unspecified
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-
-                        Column(verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.weight(0.7f).padding(top = 20.dp, bottom = 20.dp)
-                        ) {
-                            Text(text = "Hi There!\n\nWelcome to Easy Notes.", fontSize = 26.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
-                        }
-
-                        SignInButton(
-                            text = "Sign in with Google",
-                            loadingText = "Signing in...",
-                            isLoading = isLoading,
-                            icon = painterResource(id = R.drawable.google),
-                            onClick = {
-                                onClick()
-                            },
-                        )
-                        Text(
-                            text = "Crafted by ❤",
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(bottom = 22.dp, top = 8.dp)
-                        )
-
-                    }
-                }
-
-
+                onClick()
             }
-
+            Text(
+                text = stringResource(id = R.string.tandc),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                fontSize = 16.sp
+            )
         }
     }
 }
