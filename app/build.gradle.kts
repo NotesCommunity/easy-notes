@@ -89,6 +89,7 @@ object LibVersion {
 }
 
 dependencies {
+    implementation("androidx.compose.material:material:1.1.1")
     val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
     val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
 
@@ -135,6 +136,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     // UI Tests
     androidTestImplementation(composeBom)
+    implementation("androidx.compose.ui:ui")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     // Android Studio Preview support

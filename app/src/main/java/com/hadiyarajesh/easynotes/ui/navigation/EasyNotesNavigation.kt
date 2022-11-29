@@ -8,6 +8,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteScreen
+import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteViewModel
 import com.hadiyarajesh.easynotes.ui.notes.NotesScreen
 import com.hadiyarajesh.easynotes.ui.notes.NotesViewModel
 import com.hadiyarajesh.easynotes.ui.profile.ProfileScreen
@@ -53,6 +55,16 @@ fun EasyNotesNavigation(
             SettingsScreen(
                 navController = navController,
                 settingsViewModel = settingsViewModel
+            )
+        }
+
+        composable(route = TopLevelDestination.CreateNote.route) {
+            bottomBarState.value = false
+                val createNoteViewModel = hiltViewModel<CreateNoteViewModel>()
+
+            CreateNoteScreen(
+                navController = navController,
+                createNoteViewModel = createNoteViewModel
             )
         }
     }
