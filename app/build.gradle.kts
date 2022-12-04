@@ -140,6 +140,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     // UI Tests
     androidTestImplementation(composeBom)
+    implementation("androidx.compose.ui:ui")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     // Android Studio Preview support

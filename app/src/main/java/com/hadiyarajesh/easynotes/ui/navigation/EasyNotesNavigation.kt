@@ -10,6 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.hadiyarajesh.easynotes.ui.auth.AuthScreen
 import com.hadiyarajesh.easynotes.ui.auth.AuthViewModel
+
+import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteScreen
+import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteViewModel
 import com.hadiyarajesh.easynotes.ui.notes.NotesScreen
 import com.hadiyarajesh.easynotes.ui.notes.NotesViewModel
 import com.hadiyarajesh.easynotes.ui.profile.ProfileScreen
@@ -59,11 +62,20 @@ fun EasyNotesNavigation(
             )
         }
 
-        composable(route = TopLevelDestination.Auth.route){
+        composable(route = TopLevelDestination.Auth.route) {
             bottomBarState.value = false
             val authViewModel = hiltViewModel<AuthViewModel>()
 
             AuthScreen(navController = navController, authViewModel)
+        }
+        composable(route = TopLevelDestination.CreateNote.route) {
+            bottomBarState.value = false
+                val createNoteViewModel = hiltViewModel<CreateNoteViewModel>()
+
+            CreateNoteScreen(
+                navController = navController,
+                createNoteViewModel = createNoteViewModel
+            )
         }
     }
 }

@@ -36,6 +36,13 @@ sealed class TopLevelDestination(
         unselectedIcon = R.drawable.ic_settings_outlined
     )
 
+    object CreateNote : TopLevelDestination(
+        title = "Create Note",
+        route = "create_note",
+        selectedIcon = R.drawable.ic_settings_outlined,
+        unselectedIcon = R.drawable.ic_settings_outlined
+    )
+
     fun withArgs(vararg args: Any): String {
         return buildString {
             append(route)
