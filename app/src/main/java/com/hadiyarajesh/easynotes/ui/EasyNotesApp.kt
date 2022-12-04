@@ -35,7 +35,7 @@ fun EasyNotesApp() {
     EasyNotesTheme {
         val navController = rememberNavController()
         // A state that maintains visibility of a bottom bar
-        val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+        val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
 
 
         Scaffold(

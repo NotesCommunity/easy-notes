@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "719734510327",
-    "project_id": "auth-demo-c8b51",
-    "storage_bucket": "auth-demo-c8b51.appspot.com"
+    "project_number": "265972715030",
+    "project_id": "easynotes-7451b",
+    "storage_bucket": "easynotes-7451b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:719734510327:android:d6bd99f17ffea31b4f79f2",
+        "mobilesdk_app_id": "1:265972715030:android:469e6764ad259796e1af37",
         "android_client_info": {
           "package_name": "com.hadiyarajesh.easynotes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com",
+          "client_id": "265972715030-vvvo82gkkp610fd6d0ho41tmn5h22p2f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAH_tqiHuSGEiaDj27ftNMKYy1jqyTjNdQ"
+          "current_key": "AIzaSyCdKaINdts5yhEJWYc71n1IZ5X3TUm70R8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com",
+              "client_id": "265972715030-vvvo82gkkp610fd6d0ho41tmn5h22p2f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

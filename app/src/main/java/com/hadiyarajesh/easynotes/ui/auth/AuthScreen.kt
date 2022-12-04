@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -37,6 +36,7 @@ import com.hadiyarajesh.easynotes.ui.components.SignInButton
 import com.hadiyarajesh.easynotes.ui.components.VerticalSpacer
 import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 import com.hadiyarajesh.easynotes.ui.theme.Purple80
+import com.hadiyarajesh.easynotes.utility.Constants
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -45,13 +45,19 @@ fun AuthScreen(
 ) {
 
     val status by viewModel.loadingState.collectAsState()
-    val userSignedIn by viewModel.userSignedIn.collectAsState(initial = false)
+    val userSignedIn by viewModel.userSignedIn.collectAsState()
     var isLoading by remember { mutableStateOf(false) }
     var errorText by remember {
         mutableStateOf("")
     }
-    if(userSignedIn == true){
-        navController.navigate(TopLevelDestination.Notes.route)
+
+    //Log.e("TAG", "flow test")
+    LaunchedEffect(key1 = userSignedIn) {
+        if (userSignedIn!!) {
+            navController.navigate(TopLevelDestination.Notes.route) {
+                popUpTo(0)
+            }
+        }
     }
 
     val context = LocalContext.current
@@ -72,7 +78,7 @@ fun AuthScreen(
     AuthView(isLoading) {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com")
+                .requestIdToken(Constants.App.WEB_CLIENT_ID)
                 .requestEmail().build()
         val googleSignInClient = GoogleSignIn.getClient(context, gso)
         launcher.launch(googleSignInClient.signInIntent)
@@ -110,7 +116,7 @@ fun AuthView(isLoading: Boolean, onClick: () -> Unit) {
                     .size(100.dp)
             )
             SignInButton(
-                text = "Sign in with Google",
+                text = stringResource(R.string.g_sign_in),
                 icon = painterResource(id = R.drawable.google),
                 isLoading = isLoading
             ) {

@@ -35,7 +35,7 @@ android {
 
     buildTypes {
         debug {
-           /* applicationIdSuffix = ".debug"*/
+            applicationIdSuffix = ".debug"
 
             resValue("string", "app_name", "@string/app_name")
 
