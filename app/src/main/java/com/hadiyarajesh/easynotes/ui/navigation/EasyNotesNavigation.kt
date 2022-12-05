@@ -7,12 +7,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteScreen
-import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteViewModel
+import com.hadiyarajesh.easynotes.ui.home.HomeScreen
+import com.hadiyarajesh.easynotes.ui.home.HomeViewModel
 import com.hadiyarajesh.easynotes.ui.notes.NotesScreen
 import com.hadiyarajesh.easynotes.ui.notes.NotesViewModel
+import com.hadiyarajesh.easynotes.ui.notes.create.CreateNoteScreen
+import com.hadiyarajesh.easynotes.ui.notes.create.CreateNoteViewModel
 import com.hadiyarajesh.easynotes.ui.profile.ProfileScreen
 import com.hadiyarajesh.easynotes.ui.profile.ProfileViewModel
+import com.hadiyarajesh.easynotes.ui.search.SearchScreen
+import com.hadiyarajesh.easynotes.ui.search.SearchViewModel
 import com.hadiyarajesh.easynotes.ui.settings.SettingsScreen
 import com.hadiyarajesh.easynotes.ui.settings.SettingsViewModel
 
@@ -25,8 +29,28 @@ fun EasyNotesNavigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.Notes.route
+        startDestination = TopLevelDestination.Home.route
     ) {
+        composable(route = TopLevelDestination.Home.route) {
+            bottomBarState.value = true
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+
+            HomeScreen(
+                navController = navController,
+                homeViewModel = homeViewModel
+            )
+        }
+
+        composable(route = TopLevelDestination.Search.route) {
+            bottomBarState.value = true
+            val searchViewModel = hiltViewModel<SearchViewModel>()
+
+            SearchScreen(
+                navController = navController,
+                searchViewModel = searchViewModel
+            )
+        }
+
         composable(route = TopLevelDestination.Notes.route) {
             bottomBarState.value = true
             val notesViewModel = hiltViewModel<NotesViewModel>()
@@ -56,13 +80,6 @@ fun EasyNotesNavigation(
                 settingsViewModel = settingsViewModel
             )
         }
-
-        /*composable(route = TopLevelDestination.Auth.route) {
-            bottomBarState.value = false
-            val authViewModel = hiltViewModel<AuthViewModel>()
-
-            AuthScreen(authViewModel)
-        }*/
 
         composable(route = TopLevelDestination.CreateNote.route) {
             bottomBarState.value = false

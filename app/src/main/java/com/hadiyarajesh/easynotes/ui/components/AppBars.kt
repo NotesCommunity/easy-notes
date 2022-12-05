@@ -1,26 +1,24 @@
 package com.hadiyarajesh.easynotes.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import com.hadiyarajesh.easynotes.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotesTopBar() {
+fun TopAppBar(title: String) {
     TopAppBar(
-        title = { Text(text = stringResource(id = R.string.app_name)) }
+        title = { Text(text = title) }
     )
 }
 
@@ -38,6 +36,7 @@ fun ProfileTopBar(
         }
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNoteTopBar(
@@ -45,8 +44,8 @@ fun AddNoteTopBar(
     createNoteClick: () -> Unit,
     title: String,
 
-) {
-    TopAppBar(
+    ) {
+    CenterAlignedTopAppBar(
         title = { Text(text = title) },
         actions = {
             IconButton(onClick = createNoteClick) {
@@ -60,6 +59,7 @@ fun AddNoteTopBar(
         }
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsTopBar(

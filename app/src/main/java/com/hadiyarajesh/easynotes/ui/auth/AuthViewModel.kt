@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.hadiyarajesh.easynotes.utility.PreferenceManager
+import com.hadiyarajesh.easynotes.repository.DataStoreRepository
 import com.hadiyarajesh.easynotes.utility.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val preferenceManager: PreferenceManager
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     private val _authState: MutableStateFlow<UiState<String>> = MutableStateFlow(UiState.Empty)
     val authState: StateFlow<UiState<String>> = _authState.asStateFlow()
@@ -34,6 +34,6 @@ class AuthViewModel @Inject constructor(
     }
 
     private suspend fun saveUserSignedIn() {
-        preferenceManager.saveUserSignedIn(true)
+        dataStoreRepository.saveUserSignedIn(true)
     }
 }

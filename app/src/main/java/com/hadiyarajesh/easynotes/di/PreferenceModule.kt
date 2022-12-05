@@ -1,7 +1,7 @@
 package com.hadiyarajesh.easynotes.di
 
 import android.content.Context
-import com.hadiyarajesh.easynotes.utility.PreferenceManager
+import com.hadiyarajesh.easynotes.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class PreferenceModule {
     @Provides
     @Singleton
-    fun providePreferenceManager(@ApplicationContext context: Context): PreferenceManager {
-        return PreferenceManager(context)
+    fun providePreferenceManager(@ApplicationContext context: Context): DataStoreRepository {
+        return DataStoreRepository(context)
     }
 }

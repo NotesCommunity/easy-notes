@@ -23,8 +23,8 @@ import com.hadiyarajesh.easynotes.R
 import com.hadiyarajesh.easynotes.database.entity.Note
 import com.hadiyarajesh.easynotes.ui.components.EmptyViewWithText
 import com.hadiyarajesh.easynotes.ui.components.LoadingProgressBar
-import com.hadiyarajesh.easynotes.ui.components.NotesTopBar
 import com.hadiyarajesh.easynotes.ui.components.RetryItem
+import com.hadiyarajesh.easynotes.ui.components.TopAppBar
 import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +38,7 @@ fun NotesScreen(
     val notes = remember { notesViewModel.notes }.collectAsLazyPagingItems()
 
     Scaffold(
-        topBar = { NotesTopBar() },
+        topBar = { TopAppBar(title = stringResource(id = R.string.notes)) },
         floatingActionButton = { MyFloatingActionButton(navController) }
     ) { innerPadding ->
         Column(
@@ -55,6 +55,7 @@ fun NotesScreen(
         }
     }
 }
+
 @Composable
 private fun MyFloatingActionButton(navController: NavController) {
     FloatingActionButton(
@@ -63,7 +64,7 @@ private fun MyFloatingActionButton(navController: NavController) {
         },
     ) {
 
-        Icon(Icons.Filled.Add,"Create Note",)
+        Icon(Icons.Filled.Add, "Create Note")
     }
 }
 
