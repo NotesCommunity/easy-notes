@@ -113,14 +113,14 @@ fun AuthView(
             modifier = Modifier
                 .padding(12.dp)
                 .size(100.dp),
-            painter = painterResource(id = R.drawable.google),
+            painter = painterResource(id = R.drawable.ic_google_logo),
             contentDescription = null
         )
 
         SignInButton(
             modifier = Modifier.fillMaxWidth(0.8f),
             text = stringResource(R.string.g_sign_in),
-            icon = painterResource(id = R.drawable.google),
+            icon = painterResource(id = R.drawable.ic_google_logo),
             isLoading = isLoading,
             onClick = onClick
         )

@@ -1,4 +1,4 @@
-package com.hadiyarajesh.easynotes.utility
+package com.hadiyarajesh.easynotes.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.hadiyarajesh.easynotes.utility.Constants
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -19,7 +20,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = "${Constants.App.APP_NAME.lowercase()}_prefs"
 )
 
-class PreferenceManager @Inject constructor(@ApplicationContext val context: Context) {
+class DataStoreRepository @Inject constructor(@ApplicationContext val context: Context) {
     companion object {
         val APP_LANGUAGE_KEY = stringPreferencesKey(name = "app_language")
         val AUTHENTICATED = booleanPreferencesKey(name = "authenticated")

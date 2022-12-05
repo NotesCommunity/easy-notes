@@ -5,9 +5,13 @@
     <string name="notification_channel_name" translatable="false">EasyNotes</string>
     <string name="notification_channel_description" translatable="false">Default notification channel</string>
 
+    <string name="search">Search</string>
+    <string name="notes">Notes</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="create_note">Create Note</string>
+    <string name="add_note_title">Add Title</string>
+    <string name="add_note_description">Add Description</string>
 
     <string name="welcome_message">Welcome to EasyNotes</string>
     <string name="retry">Retry</string>

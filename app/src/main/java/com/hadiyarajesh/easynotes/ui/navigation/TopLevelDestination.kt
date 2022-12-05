@@ -9,6 +9,20 @@ sealed class TopLevelDestination(
     @DrawableRes val selectedIcon: Int,
     @DrawableRes val unselectedIcon: Int
 ) {
+    object Home : TopLevelDestination(
+        title = "Home",
+        route = "home",
+        selectedIcon = R.drawable.ic_home_filled,
+        unselectedIcon = R.drawable.ic_home_outlined
+    )
+
+    object Search : TopLevelDestination(
+        title = "Search",
+        route = "search",
+        selectedIcon = R.drawable.ic_search_filled,
+        unselectedIcon = R.drawable.ic_search_outlined
+    )
+
     object Notes : TopLevelDestination(
         title = "Notes",
         route = "all_notes",
@@ -26,12 +40,6 @@ sealed class TopLevelDestination(
     object Settings : TopLevelDestination(
         title = "Settings",
         route = "settings",
-        selectedIcon = R.drawable.ic_settings_outlined,
-        unselectedIcon = R.drawable.ic_settings_outlined
-    )
-    object Auth : TopLevelDestination(
-        title = "Auth",
-        route="Auth",
         selectedIcon = R.drawable.ic_settings_outlined,
         unselectedIcon = R.drawable.ic_settings_outlined
     )
@@ -54,6 +62,8 @@ sealed class TopLevelDestination(
 }
 
 val bottomNavItems = listOf(
+    TopLevelDestination.Home,
+    TopLevelDestination.Search,
     TopLevelDestination.Notes,
     TopLevelDestination.Profile
 )
