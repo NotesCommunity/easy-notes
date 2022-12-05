@@ -6,40 +6,34 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hadiyarajesh.easynotes.utility.PreferenceManager
+import com.hadiyarajesh.easynotes.utility.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val preferenceManager: PreferenceManager) : ViewModel() {
-    private val _loadingState = MutableStateFlow(LoadingState.IDLE)
-    val loadingState get() : StateFlow<LoadingState> = _loadingState
+class AuthViewModel @Inject constructor(
+    private val preferenceManager: PreferenceManager
+) : ViewModel() {
+    private val _authState: MutableStateFlow<UiState<String>> = MutableStateFlow(UiState.Empty)
+    val authState: StateFlow<UiState<String>> = _authState.asStateFlow()
 
-
-    val userSignedIn = preferenceManager.isUserSignedIn.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = false
-    )
-
-    fun signInWithGoogle(credential: AuthCredential) =viewModelScope.launch {
-        try{
-            _loadingState.emit(LoadingState.LOADING)
+    fun signInWithGoogle(credential: AuthCredential) = viewModelScope.launch {
+        try {
+            _authState.value = UiState.Loading
             Firebase.auth.signInWithCredential(credential).await()
             saveUserSignedIn()
-            _loadingState.emit(LoadingState.LOADED)
-
-        }catch (e:Exception){
-            _loadingState.emit(LoadingState.error(e.localizedMessage))
+            _authState.value = UiState.Success("Logged in successfully")
+        } catch (e: Exception) {
+            _authState.value = UiState.Error(e.localizedMessage)
         }
     }
 
     private suspend fun saveUserSignedIn() {
         preferenceManager.saveUserSignedIn(true)
     }
-
 }
