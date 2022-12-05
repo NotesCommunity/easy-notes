@@ -2,7 +2,11 @@ package com.hadiyarajesh.easynotes.utility
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -33,7 +37,7 @@ class PreferenceManager @Inject constructor(@ApplicationContext val context: Con
             preferences[APP_LANGUAGE_KEY]
         }
 
-    val isUserSignedIn: Flow<Boolean?> = context.dataStore.data
+    val authenticated: Flow<Boolean> = context.dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emptyPreferences()
@@ -42,7 +46,7 @@ class PreferenceManager @Inject constructor(@ApplicationContext val context: Con
             }
         }
         .map { preferences ->
-            preferences[AUTHENTICATED]
+            preferences[AUTHENTICATED] ?: false
         }
 
     suspend fun saveAppLanguage(language: String) {
@@ -51,7 +55,7 @@ class PreferenceManager @Inject constructor(@ApplicationContext val context: Con
         }
     }
 
-    suspend fun saveUserSignedIn(isSigned : Boolean) {
+    suspend fun saveUserSignedIn(isSigned: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AUTHENTICATED] = isSigned
         }

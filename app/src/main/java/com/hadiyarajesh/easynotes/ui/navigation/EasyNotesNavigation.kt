@@ -1,6 +1,5 @@
 package com.hadiyarajesh.easynotes.ui.navigation
 
-//import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -8,9 +7,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.hadiyarajesh.easynotes.ui.auth.AuthScreen
-import com.hadiyarajesh.easynotes.ui.auth.AuthViewModel
-
 import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteScreen
 import com.hadiyarajesh.easynotes.ui.createnote.CreateNoteViewModel
 import com.hadiyarajesh.easynotes.ui.notes.NotesScreen
@@ -29,9 +25,8 @@ fun EasyNotesNavigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.Auth.route
+        startDestination = TopLevelDestination.Notes.route
     ) {
-
         composable(route = TopLevelDestination.Notes.route) {
             bottomBarState.value = true
             val notesViewModel = hiltViewModel<NotesViewModel>()
@@ -62,15 +57,16 @@ fun EasyNotesNavigation(
             )
         }
 
-        composable(route = TopLevelDestination.Auth.route) {
+        /*composable(route = TopLevelDestination.Auth.route) {
             bottomBarState.value = false
             val authViewModel = hiltViewModel<AuthViewModel>()
 
-            AuthScreen(navController = navController, authViewModel)
-        }
+            AuthScreen(authViewModel)
+        }*/
+
         composable(route = TopLevelDestination.CreateNote.route) {
             bottomBarState.value = false
-                val createNoteViewModel = hiltViewModel<CreateNoteViewModel>()
+            val createNoteViewModel = hiltViewModel<CreateNoteViewModel>()
 
             CreateNoteScreen(
                 navController = navController,
@@ -79,44 +75,3 @@ fun EasyNotesNavigation(
         }
     }
 }
-
-//@Composable
-//fun MainBottomBar(
-//    navController: NavController,
-//    items: List<TopLevelDestination>
-//) {
-//    BottomNavigation(
-//        modifier = Modifier.height(50.dp),
-//        backgroundColor = MaterialTheme.colors.background,
-//        contentColor = contentColorFor(MaterialTheme.colors.background)
-//    ) {
-//        val navBackStackEntry by navController.currentBackStackEntryAsState()
-//
-//        items.forEach { screen ->
-//            val selected = navBackStackEntry?.destination?.route == screen.route
-//            val icon = if (selected) screen.selectedIcon else screen.unselectedIcon
-//
-//            BottomNavigationItem(
-//                icon = {
-//                    Icon(
-//                        modifier = Modifier.iconSize(),
-//                        painter = painterResource(id = icon),
-//                        contentDescription = screen.route
-//                    )
-//                },
-//                selected = selected,
-//                onClick = {
-//                    navController.navigate(screen.route) {
-//                        popUpTo(navController.graph.findStartDestination().id) {
-//                            saveState = true
-//                        }
-//                        launchSingleTop = true
-//                        restoreState = true
-//                    }
-//                },
-//                label = { Text(text = screen.route) },
-//                alwaysShowLabel = false
-//            )
-//        }
-//    }
-//}

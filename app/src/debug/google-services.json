@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "719734510327",
+    "project_id": "auth-demo-c8b51",
+    "storage_bucket": "auth-demo-c8b51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719734510327:android:d6bd99f17ffea31b4f79f2",
+        "android_client_info": {
+          "package_name": "com.hadiyarajesh.easynotes.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH_tqiHuSGEiaDj27ftNMKYy1jqyTjNdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

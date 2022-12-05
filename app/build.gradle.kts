@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -33,13 +35,30 @@ android {
         }
     }
 
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties.getProperty("store.file"))
+            storePassword = properties.getProperty("store.password")
+            keyAlias = properties.getProperty("key.alias")
+            keyPassword = properties.getProperty("key.password")
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
 
-            resValue("string", "app_name", "@string/app_name")
+            resValue("string", "app_name", "@string/app_name_debug")
 
             buildConfigField("String", "API_BASE_URL", "\"BASE_API_URL_DEV\"")
+            buildConfigField(
+                "String",
+                "GOOGLE_WEB_CLIENT_ID",
+                "\"719734510327-fkl6rvtae915bkc6j62u0d987jge5d0u.apps.googleusercontent.com\""
+            )
         }
 
         release {
@@ -49,6 +68,13 @@ android {
             resValue("string", "app_name", "@string/app_name_release")
 
             buildConfigField("String", "API_BASE_URL", "\"BASE_API_URL_PROD\"")
+            buildConfigField(
+                "String",
+                "GOOGLE_WEB_CLIENT_ID",
+                "\"265972715030-vvvo82gkkp610fd6d0ho41tmn5h22p2f.apps.googleusercontent.com\""
+            )
+
+            signingConfig = signingConfigs.getByName("release")
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -84,18 +110,11 @@ object LibVersion {
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.13.0"
     const val accompanistVersion = "0.27.0"
-    const val flowerVersion = "3.0.0"
-    const val coilVersion = "2.2.2"
-    const val authVersion = "20.4.0"
 }
 
 dependencies {
-    implementation("androidx.compose.material:material:1.1.1")
     val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
     val firebaseBom = platform("com.google.firebase:firebase-bom:31.0.2")
-    implementation(firebaseBom)
-    implementation ("com.google.firebase:firebase-auth-ktx")
-    implementation ("com.google.android.gms:play-services-auth:${LibVersion.authVersion}")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:1.6.1")
@@ -104,10 +123,14 @@ dependencies {
     implementation(composeBom)
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.navigation:navigation-compose:2.6.0-alpha03")
+    implementation("androidx.navigation:navigation-compose:2.6.0-alpha04")
     implementation("androidx.datastore:datastore-preferences:${LibVersion.dataStoreVersion}")
     implementation("androidx.paging:paging-compose:1.0.0-alpha17")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+
+    implementation(firebaseBom)
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.4.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVersion"]}")
@@ -127,17 +150,17 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:${LibVersion.accompanistVersion}")
     implementation("com.google.accompanist:accompanist-permissions:${LibVersion.accompanistVersion}")
 
-    implementation("io.coil-kt:coil-compose:${LibVersion.coilVersion}") {
+    implementation("io.coil-kt:coil-compose:2.2.2") {
         because("We need image loading library")
     }
 
-    implementation("io.github.hadiyarajesh.flower-retrofit:flower-retrofit:${LibVersion.flowerVersion}") {
+    implementation("io.github.hadiyarajesh.flower-retrofit:flower-retrofit:3.1.0") {
         because("We need networking and database caching")
     }
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     // UI Tests
     androidTestImplementation(composeBom)
     implementation("androidx.compose.ui:ui")
@@ -147,8 +170,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.android.gms:play-services-auth:20.3.0")
+    implementation("com.google.android.gms:play-services-auth:20.4.0")
     implementation("com.google.firebase:firebase-analytics-ktx")
-
-
 }

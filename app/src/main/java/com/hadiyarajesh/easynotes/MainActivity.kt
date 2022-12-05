@@ -7,15 +7,44 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.hadiyarajesh.easynotes.ui.EasyNotesApp
+import com.hadiyarajesh.easynotes.ui.auth.AuthScreen
+import com.hadiyarajesh.easynotes.ui.settings.SettingsViewModel
+import com.hadiyarajesh.easynotes.ui.theme.EasyNotesTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val settingsViewModel: SettingsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            EasyNotesApp()
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                settingsViewModel.authenticated.collect { authenticated ->
+                    authenticated?.also {
+                        if (it) {
+                            setContent {
+                                EasyNotesTheme {
+                                    EasyNotesApp()
+                                }
+                            }
+                        } else {
+                            setContent {
+                                EasyNotesTheme {
+                                    AuthScreen()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         createNotificationChannel()

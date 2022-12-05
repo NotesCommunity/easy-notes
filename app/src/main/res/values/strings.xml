@@ -12,7 +12,7 @@
     <string name="welcome_message">Welcome to EasyNotes</string>
     <string name="retry">Retry</string>
     <string name="empty_message">It\'s all empty here</string>
-    <string name="tandc">By joining, you agree to the Privacy Policy and Terms of Usage</string>
+    <string name="privacy_policy_and_terms_of_usage">By joining, you agree to the Privacy Policy and Terms of Usage</string>
     <string name="g_sign_in">Sign in with Google</string>
     <string name="title_activity_create_note">CreateNoteActivity</string>
 </resources>

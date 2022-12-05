@@ -14,29 +14,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hadiyarajesh.easynotes.ui.auth.AuthScreen
 import com.hadiyarajesh.easynotes.ui.navigation.EasyNotesNavigation
 import com.hadiyarajesh.easynotes.ui.navigation.TopLevelDestination
 import com.hadiyarajesh.easynotes.ui.navigation.bottomNavItems
-import com.hadiyarajesh.easynotes.ui.theme.EasyNotesTheme
-import com.hadiyarajesh.easynotes.utility.PreferenceManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EasyNotesApp() {
-    EasyNotesTheme {
         val navController = rememberNavController()
         // A state that maintains visibility of a bottom bar
         val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
-
 
         Scaffold(
             bottomBar = {
@@ -67,7 +60,6 @@ fun EasyNotesApp() {
                 bottomBarState = bottomBarState
             )
         }
-    }
 }
 
 @Composable
