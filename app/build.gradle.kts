@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -35,17 +33,17 @@ android {
         }
     }
 
-    val properties = Properties()
-    properties.load(project.rootProject.file("local.properties").inputStream())
-
-    signingConfigs {
-        create("release") {
-            storeFile = file(properties.getProperty("store.file"))
-            storePassword = properties.getProperty("store.password")
-            keyAlias = properties.getProperty("key.alias")
-            keyPassword = properties.getProperty("key.password")
-        }
-    }
+//    val properties = Properties()
+//    properties.load(project.rootProject.file("local.properties").inputStream())
+//
+//    signingConfigs {
+//        create("release") {
+//            storeFile = file(properties.getProperty("store.file"))
+//            storePassword = properties.getProperty("store.password")
+//            keyAlias = properties.getProperty("key.alias")
+//            keyPassword = properties.getProperty("key.password")
+//        }
+//    }
 
     buildTypes {
         debug {
@@ -74,7 +72,7 @@ android {
                 "\"265972715030-vvvo82gkkp610fd6d0ho41tmn5h22p2f.apps.googleusercontent.com\""
             )
 
-            signingConfig = signingConfigs.getByName("release")
+//            signingConfig = signingConfigs.getByName("release")
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
