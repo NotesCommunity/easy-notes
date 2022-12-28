@@ -82,11 +82,11 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -128,6 +128,7 @@ dependencies {
 
     implementation(firebaseBom)
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.android.gms:play-services-auth:20.4.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
@@ -166,8 +167,4 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     // Android Studio Preview support
     debugImplementation("androidx.compose.ui:ui-tooling")
-
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.android.gms:play-services-auth:20.4.0")
-    implementation("com.google.firebase:firebase-analytics-ktx")
 }
